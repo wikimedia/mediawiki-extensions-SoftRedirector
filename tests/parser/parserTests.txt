@@ -1,8 +1,8 @@
 !! article
-Disambig
+Softredir
 !! text
-This is a disambig page.
-__DISAMBIG__
+This is a softredir page.
+__SOFTREDIR__
 !! endarticle
 
 !! article
@@ -12,10 +12,10 @@ This is a normal page.
 !! endarticle
 
 !! test
-Link to disambig and non-disambig page
+Link to softredir and non-softredir page
 !! input
-I am linking to [[Disambig]] and [[Normal]].
+I am linking to [[Softredir]] and [[Normal]].
 !! result
-<p>I am linking to <a href="/wiki/Disambig" class="mw-disambig" title="Disambig">Disambig</a> and <a href="/wiki/Normal" title="Normal">Normal</a>.
+<p>I am linking to <a href="/wiki/Softredir" class="mw-softredir" title="Softredir">Softredir</a> and <a href="/wiki/Normal" title="Normal">Normal</a>.
 </p>
 !! end
