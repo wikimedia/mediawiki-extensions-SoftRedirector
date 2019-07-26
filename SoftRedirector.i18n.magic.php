@@ -10,10 +10,10 @@ $magicWords = [];
 
 /** English (English) */
 $magicWords['en'] = [
-	'softredirect' => [ '1', '__DISAMBIG__' ],
+	'softredirect' => [ '1', '__SOFTREDIR__' ],
 ];
 
 /** Scots (Scots) */
 $magicWords['sco'] = [
-	'softredirect' => [ '1', '__DISAMBIG__' ],
+	'softredirect' => [ '1', '__SOFTREDIR__' ],
 ];
