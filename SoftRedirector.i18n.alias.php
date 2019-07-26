@@ -1,6 +1,6 @@
 <?php
 /**
- * Aliases for special pages of the Disambiguator extension
+ * Aliases for special pages of the SoftRedirector extension
  *
  * @file
  * @ingroup Extensions
