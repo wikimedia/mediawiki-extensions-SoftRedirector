@@ -1,5 +1,5 @@
 /*!
- * VisualEditor DataModel MWDisambiguationMetaItem class.
+ * VisualEditor DataModel MWSoftRedirectMetaItem class.
  *
  * @copyright 2011-2014 VisualEditor Team
  * @license The MIT License (MIT); see COPYING
@@ -8,47 +8,47 @@
 /*global ve, OO, mw*/
 
 /**
- * DataModel disambiguation meta item (for __DISAMBIG__).
+ * DataModel soft redirect meta item (for __SOFTREDIR__).
  *
  * @class
  * @extends ve.dm.MetaItem
  * @constructor
  * @param {Object} element Reference to element in meta-linmod
  */
-ve.dm.MWDisambiguationMetaItem = function VeDmMWDisambiguationMetaItem( element ) {
+ve.dm.MWSoftRedirectMetaItem = function VeDmMWSoftRedirectMetaItem( element ) {
 	// Parent constructor
 	ve.dm.MetaItem.call( this, element );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.dm.MWDisambiguationMetaItem, ve.dm.MetaItem );
+OO.inheritClass( ve.dm.MWSoftRedirectMetaItem, ve.dm.MetaItem );
 
 /* Static Properties */
 
-ve.dm.MWDisambiguationMetaItem.static.name = 'mwDisambiguation';
+ve.dm.MWSoftRedirectMetaItem.static.name = 'mwSoftRedirect';
 
-ve.dm.MWDisambiguationMetaItem.static.group = 'mwDisambiguation';
+ve.dm.MWSoftRedirectMetaItem.static.group = 'mwSoftRedirect';
 
-ve.dm.MWDisambiguationMetaItem.static.matchTagNames = [ 'meta' ];
+ve.dm.MWSoftRedirectMetaItem.static.matchTagNames = [ 'meta' ];
 
-ve.dm.MWDisambiguationMetaItem.static.matchRdfaTypes = [ 'mw:PageProp/disambiguation' ];
+ve.dm.MWSoftRedirectMetaItem.static.matchRdfaTypes = [ 'mw:PageProp/softredirect' ];
 
-ve.dm.MWDisambiguationMetaItem.static.toDataElement = function () {
+ve.dm.MWSoftRedirectMetaItem.static.toDataElement = function () {
 	return { 'type': this.name };
 };
 
-ve.dm.MWDisambiguationMetaItem.static.toDomElements = function ( dataElement, doc ) {
+ve.dm.MWSoftRedirectMetaItem.static.toDomElements = function ( dataElement, doc ) {
 	var meta = doc.createElement( 'meta' );
-	meta.setAttribute( 'property', 'mw:PageProp/disambiguation' );
+	meta.setAttribute( 'property', 'mw:PageProp/softredirect' );
 	return [ meta ];
 };
 
 /* Registration */
 
-ve.dm.modelRegistry.register( ve.dm.MWDisambiguationMetaItem );
+ve.dm.modelRegistry.register( ve.dm.MWSoftRedirectMetaItem );
 
 ve.ui.MWSettingsPage.static.addMetaCheckbox(
-	'mwDisambiguation',
-	mw.msg( 'visualeditor-dialog-meta-settings-disambiguation-label' )
+	'mwSoftRedirect',
+	mw.msg( 'visualeditor-dialog-meta-settings-softredirect-label' )
 );
