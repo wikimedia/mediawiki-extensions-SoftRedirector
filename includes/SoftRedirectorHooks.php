@@ -1,105 +1,105 @@
 <?php
 /**
- * Hooks for Disambiguator extension
+ * Hooks for SoftRedirector extension
  *
  * @file
  * @ingroup Extensions
  */
 
-class DisambiguatorHooks {
+class SoftRedirectorHooks {
 	/**
 	 * @param array &$doubleUnderscoreIDs
 	 */
 	public static function onGetDoubleUnderscoreIDs( &$doubleUnderscoreIDs ) {
-		$doubleUnderscoreIDs[] = 'disambiguation';
+		$doubleUnderscoreIDs[] = 'softredirect';
 	}
 
 	/**
-	 * Add the Disambiguator special pages to the list of QueryPages. This
+	 * Add the SoftRedirector special pages to the list of QueryPages. This
 	 * allows direct access via the API.
 	 * @param array &$queryPages
 	 */
 	public static function onwgQueryPages( &$queryPages ) {
-		$queryPages[] = [ SpecialDisambiguationPages::class, 'DisambiguationPages' ];
-		$queryPages[] = [ SpecialDisambiguationPageLinks::class, 'DisambiguationPageLinks' ];
+		$queryPages[] = [ SpecialSoftRedirectPages::class, 'SoftRedirectPages' ];
+		$queryPages[] = [ SpecialSoftRedirectPageLinks::class, 'SoftRedirectPageLinks' ];
 	}
 
 	/**
-	 * Modify query parameters to ignore disambiguation pages
+	 * Modify query parameters to ignore soft redirect pages
 	 * @param array &$tables
 	 * @param array &$conds
 	 * @param array &$joinConds
 	 */
-	private static function excludeDisambiguationPages( &$tables, &$conds, &$joinConds ) {
+	private static function excludeSoftRedirectPages( &$tables, &$conds, &$joinConds ) {
 		$tables[] = 'page_props';
 		$conds['pp_page'] = null;
 		$joinConds['page_props'] = [
-			'LEFT JOIN', [ 'page_id = pp_page', 'pp_propname' => 'disambiguation' ]
+			'LEFT JOIN', [ 'page_id = pp_page', 'pp_propname' => 'softredirect' ]
 		];
 	}
 
 	/**
-	 * Modify the Special:AncientPages query to ignore disambiguation pages
+	 * Modify the Special:AncientPages query to ignore soft redirect pages
 	 * @param array &$tables
 	 * @param array &$conds
 	 * @param array &$joinConds
 	 */
 	public static function onAncientPagesQuery( &$tables, &$conds, &$joinConds ) {
-		self::excludeDisambiguationPages( $tables, $conds, $joinConds );
+		self::excludeSoftRedirectPages( $tables, $conds, $joinConds );
 	}
 
 	/**
-	 * Modify the Special:LonelyPages query to ignore disambiguation pages
+	 * Modify the Special:LonelyPages query to ignore soft redirect pages
 	 * @param array &$tables
 	 * @param array &$conds
 	 * @param array &$joinConds
 	 */
 	public static function onLonelyPagesQuery( &$tables, &$conds, &$joinConds ) {
-		self::excludeDisambiguationPages( $tables, $conds, $joinConds );
+		self::excludeSoftRedirectPages( $tables, $conds, $joinConds );
 	}
 
 	/**
-	 * Modify the Special:ShortPages query to ignore disambiguation pages
+	 * Modify the Special:ShortPages query to ignore soft redirect pages
 	 * @param array &$tables
 	 * @param array &$conds
 	 * @param array &$joinConds
 	 * @param array &$options
 	 */
 	public static function onShortPagesQuery( &$tables, &$conds, &$joinConds, &$options ) {
-		self::excludeDisambiguationPages( $tables, $conds, $joinConds );
+		self::excludeSoftRedirectPages( $tables, $conds, $joinConds );
 	}
 
 	/**
-	 * Modify the Special:Random query to ignore disambiguation pages
+	 * Modify the Special:Random query to ignore soft redirect pages
 	 * @param array &$tables
 	 * @param array &$conds
 	 * @param array &$joinConds
 	 */
 	public static function onRandomPageQuery( &$tables, &$conds, &$joinConds ) {
-		self::excludeDisambiguationPages( $tables, $conds, $joinConds );
+		self::excludeSoftRedirectPages( $tables, $conds, $joinConds );
 	}
 
 	/**
-	 * Convenience function for testing whether or not a page is a disambiguation page
+	 * Convenience function for testing whether or not a page is a soft redirect page
 	 * @param Title $title object of a page
-	 * @param bool $includeRedirects Whether to consider redirects to disambiguations as
-	 *   disambiguations.
+	 * @param bool $includeRedirects Whether to consider redirects to soft redirects as
+	 *   soft redirects.
 	 * @return bool
 	 */
-	public static function isDisambiguationPage( Title $title, $includeRedirects = true ) {
-		$res = static::filterDisambiguationPageIds(
+	public static function isSoftRedirectPage( Title $title, $includeRedirects = true ) {
+		$res = static::filtersoftredirectPageIds(
 			[ $title->getArticleID() ], $includeRedirects );
 		return (bool)count( $res );
 	}
 
 	/**
-	 * Convenience function for testing whether or not pages are disambiguation pages
+	 * Convenience function for testing whether or not pages are soft redirect pages
 	 * @param int[] $pageIds
-	 * @param bool $includeRedirects Whether to consider redirects to disambiguations as
-	 *   disambiguations.
-	 * @return int[] The page ids corresponding to pages that are disambiguations
+	 * @param bool $includeRedirects Whether to consider redirects to soft redirects as
+	 *   soft redirects.
+	 * @return int[] The page ids corresponding to pages that are soft redirects
 	 */
-	private static function filterDisambiguationPageIds(
+	private static function filtersoftredirectPageIds(
 		array $pageIds, $includeRedirects = true
 	) {
 		// Don't needlessly check non-existent and special pages
@@ -139,17 +139,17 @@ class DisambiguatorHooks {
 			$res = $dbr->select(
 				'page_props',
 				'pp_page',
-				[ 'pp_page' => $pageIdsWithRedirects, 'pp_propname' => 'disambiguation' ],
+				[ 'pp_page' => $pageIdsWithRedirects, 'pp_propname' => 'softredirect' ],
 				__METHOD__
 			);
 
 			foreach ( $res as $row ) {
-				$disambiguationPageId = $row->pp_page;
-				if ( array_key_exists( $disambiguationPageId, $redirects ) ) {
-					$output[] = $redirects[$disambiguationPageId];
+				$softredirectPageId = $row->pp_page;
+				if ( array_key_exists( $softredirectPageId, $redirects ) ) {
+					$output[] = $redirects[$softredirectPageId];
 				}
-				if ( in_array( $disambiguationPageId, $pageIds ) ) {
-					$output[] = $disambiguationPageId;
+				if ( in_array( $softredirectPageId, $pageIds ) ) {
+					$output[] = $softredirectPageId;
 				}
 			}
 		}
@@ -158,22 +158,22 @@ class DisambiguatorHooks {
 	}
 
 	/**
-	 * Add 'mw-disambig' CSS class to links to disambiguation pages.
+	 * Add 'mw-softredir' CSS class to links to soft redirect pages.
 	 * @param array $pageIdToDbKey Prefixed DB keys of the pages linked to, indexed by page_id
 	 * @param array &$colours CSS classes, indexed by prefixed DB keys
 	 */
 	public static function onGetLinkColours( $pageIdToDbKey, &$colours ) {
-		global $wgDisambiguatorIndicateLinks;
-		if ( !$wgDisambiguatorIndicateLinks ) {
+		global $wgSoftRedirectIndicateLinks;
+		if ( !$wgSoftRedirectIndicateLinks ) {
 			return;
 		}
 
-		$pageIds = static::filterDisambiguationPageIds( array_keys( $pageIdToDbKey ) );
+		$pageIds = static::filtersoftredirectPageIds( array_keys( $pageIdToDbKey ) );
 		foreach ( $pageIds as $pageId ) {
 			if ( isset( $colours[ $pageIdToDbKey[$pageId] ] ) ) {
-				$colours[ $pageIdToDbKey[$pageId] ] .= ' mw-disambig';
+				$colours[ $pageIdToDbKey[$pageId] ] .= ' mw-softredir';
 			} else {
-				$colours[ $pageIdToDbKey[$pageId] ] = 'mw-disambig';
+				$colours[ $pageIdToDbKey[$pageId] ] = 'mw-softredir';
 			}
 		}
 	}

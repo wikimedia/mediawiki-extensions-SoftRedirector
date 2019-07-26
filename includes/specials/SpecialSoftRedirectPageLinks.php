@@ -1,7 +1,7 @@
 <?php
 /**
- * DisambiguationPageLinks SpecialPage for Disambiguator extension
- * This page lists all pages that link to disambiguation pages.
+ * SoftRedirectPageLinks SpecialPage for SoftRedirector extension
+ * This page lists all pages that link to soft redirect pages.
  *
  * @file
  * @ingroup Extensions
@@ -10,13 +10,13 @@
 use Wikimedia\Rdbms\DBError;
 use Wikimedia\Rdbms\IResultWrapper;
 
-class SpecialDisambiguationPageLinks extends QueryPage {
+class SpecialSoftRedirectPageLinks extends QueryPage {
 
 	/**
 	 * Initialize the special page.
 	 */
 	public function __construct() {
-		parent::__construct( 'DisambiguationPageLinks' );
+		parent::__construct( 'SoftRedirectPageLinks' );
 	}
 
 	public function isExpensive() {
@@ -46,7 +46,7 @@ class SpecialDisambiguationPageLinks extends QueryPage {
 			],
 			'conds' => [
 				'p1.page_id = pp_page',
-				'pp_propname' => 'disambiguation',
+				'pp_propname' => 'softredirect',
 				'pl_namespace = p1.page_namespace',
 				'pl_title = p1.page_title',
 				'p2.page_id = pl_from',
@@ -168,7 +168,7 @@ class SpecialDisambiguationPageLinks extends QueryPage {
 	}
 
 	public function execute( $par ) {
-		$this->addHelpLink( 'Extension:Disambiguator' );
+		$this->addHelpLink( 'Extension:SoftRedirector' );
 		parent::execute( $par );
 	}
 

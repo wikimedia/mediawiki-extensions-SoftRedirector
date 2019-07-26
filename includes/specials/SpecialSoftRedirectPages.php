@@ -1,19 +1,19 @@
 <?php
 /**
- * DisambiguationPages SpecialPage for Disambiguator extension
- * This page lists all the disambiguation pages
+ * SoftRedirectPages SpecialPage for SoftRedirector extension
+ * This page lists all the soft redirect pages
  *
  * @file
  * @ingroup Extensions
  */
 
-class SpecialDisambiguationPages extends QueryPage {
+class SpecialSoftRedirectPages extends QueryPage {
 
 	/**
 	 * Initialize the special page.
 	 */
 	public function __construct() {
-		parent::__construct( 'DisambiguationPages' );
+		parent::__construct( 'SoftRedirectPages' );
 	}
 
 	public function isExpensive() {
@@ -37,13 +37,13 @@ class SpecialDisambiguationPages extends QueryPage {
 			],
 			'conds' => [
 				'page_id = pp_page',
-				'pp_propname' => 'disambiguation',
+				'pp_propname' => 'softredirect',
 			]
 		];
 	}
 
 	public function execute( $par ) {
-		$this->addHelpLink( 'Extension:Disambiguator' );
+		$this->addHelpLink( 'Extension:SoftRedirector' );
 		parent::execute( $par );
 	}
 
