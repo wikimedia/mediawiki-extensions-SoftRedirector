@@ -1,11 +1,11 @@
-Disambiguator
+SoftRedirector
 =============
 
-See https://www.mediawiki.org/wiki/Extension:Disambiguator for detailed documentation.
+See https://www.mediawiki.org/wiki/Extension:SoftRedirector for detailed documentation.
 
 Configuration
 -------------
 
 The following configuration variables can be set from your LocalSettings.php file.
 
-* `$wgDisambiguatorIndicateLinks`: whether to add a 'mw-disambig' CSS class to links to disambiguation pages
+* `$wgSoftRedirectorIndicateLinks`: whether to add a 'mw-softredir' CSS class to links to soft redirect pages
