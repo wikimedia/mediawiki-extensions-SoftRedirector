@@ -1,6 +1,6 @@
 {
 	"name": "SoftRedirector",
-	"version": "0.13",
+	"version": "0.138",
 	"author": [
 		"Ryan Kaldari"
 		"MJL"
@@ -9,7 +9,7 @@
 	"descriptionmsg": "softredir-desc",
 	"license-name": "MIT",
 	"requires": {
-		"MediaWiki": ">= 1.28.0"
+		"MediaWiki": ">= 1.33.0"
 	},
 	"type": "other",
 	"ExtensionMessagesFiles": {
