@@ -31,10 +31,10 @@ class SoftRedirectorHooks {
 	 * @param array &$joinConds
 	 */
 	private static function excludeSoftRedirectPages( &$tables, &$conds, &$joinConds ) {
-		$tables[] = 'page_props';
-		$conds['pp_page'] = null;
-		$joinConds['page_props'] = [
-			'LEFT JOIN', [ 'page_id = pp_page', 'pp_propname' => 'softredirect' ]
+		$tables['softredirpp'] = 'page_props';
+		$conds['softredirpp.pp_page'] = null;
+		$joinConds['softredirpp'] = [
+			'LEFT JOIN', [ 'page_id = softredirpp.pp_page', 'softredirpp.pp_propname' => 'softredirect' ]
 		];
 	}
 
