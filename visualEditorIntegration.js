@@ -5,8 +5,6 @@
  * @license The MIT License (MIT); see COPYING
  */
 
-/*global ve, OO, mw*/
-
 /**
  * DataModel soft redirect meta item (for __SOFTREDIR__).
  *
@@ -35,7 +33,7 @@ ve.dm.MWSoftRedirectMetaItem.static.matchTagNames = [ 'meta' ];
 ve.dm.MWSoftRedirectMetaItem.static.matchRdfaTypes = [ 'mw:PageProp/softredirect' ];
 
 ve.dm.MWSoftRedirectMetaItem.static.toDataElement = function () {
-	return { 'type': this.name };
+	return { type: this.name };
 };
 
 ve.dm.MWSoftRedirectMetaItem.static.toDomElements = function ( dataElement, doc ) {
