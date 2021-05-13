@@ -105,7 +105,7 @@ class SoftRedirectorHooks {
 		// Don't needlessly check non-existent and special pages
 		$pageIds = array_filter(
 			$pageIds,
-			function ( $id ) {
+			static function ( $id ) {
 				return $id > 0;
 			}
 		);
