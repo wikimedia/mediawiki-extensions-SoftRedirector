@@ -107,7 +107,7 @@ class SpecialSoftRedirectPageLinks extends QueryPage {
 		}
 
 		$fname = get_class( $this ) . '::recache';
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 		if ( !$dbw ) {
 			return false;
 		}
