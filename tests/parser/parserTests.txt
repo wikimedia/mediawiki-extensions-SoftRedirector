@@ -1,3 +1,5 @@
+!! version 2
+
 !! article
 Softredir
 !! text
@@ -13,9 +15,11 @@ This is a normal page.
 
 !! test
 Link to softredir and non-softredir page
-!! input
+!! config
+wgSoftRedirectIndicateLinks=true
+!! wikitext
 I am linking to [[Softredir]] and [[Normal]].
-!! result
+!! html
 <p>I am linking to <a href="/wiki/Softredir" class="mw-softredir" title="Softredir">Softredir</a> and <a href="/wiki/Normal" title="Normal">Normal</a>.
 </p>
 !! end
