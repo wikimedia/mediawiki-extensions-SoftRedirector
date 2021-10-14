@@ -71,7 +71,12 @@
 	},
 	"SpecialPages": {
 		"SoftRedirectPages": "SpecialSoftRedirectPages",
-		"SoftRedirectPageLinks": "SpecialSoftRedirectPageLinks"
+		"SoftRedirectPageLinks": {
+			"class": "SpecialSoftRedirectPageLinks",
+			"services": [
+				"NamespaceInfo"
+			]
+		}
 	},
 	"AutoloadClasses": {
 		"SoftRedirectorHooks": "includes/SoftRedirectorHooks.php",

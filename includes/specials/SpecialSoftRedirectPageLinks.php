@@ -11,12 +11,15 @@ use Wikimedia\Rdbms\DBError;
 use Wikimedia\Rdbms\IResultWrapper;
 
 class SpecialSoftRedirectPageLinks extends QueryPage {
+	/** @var NamespaceInfo */
+	private $namespaceInfo;
 
 	/**
-	 * Initialize the special page.
+	 * @param NamespaceInfo $namespaceInfo
 	 */
-	public function __construct() {
+	public function __construct( NamespaceInfo $namespaceInfo ) {
 		parent::__construct( 'SoftRedirectPageLinks' );
+		$this->namespaceInfo = $namespaceInfo;
 	}
 
 	public function isExpensive() {
@@ -50,7 +53,7 @@ class SpecialSoftRedirectPageLinks extends QueryPage {
 				'pl_namespace = p1.page_namespace',
 				'pl_title = p1.page_title',
 				'p2.page_id = pl_from',
-				'p2.page_namespace' => MWNamespace::getContentNamespaces(),
+				'p2.page_namespace' => $this->namespaceInfo->getContentNamespaces(),
 				'p2.page_is_redirect != 1'
 			]
 		];
