@@ -1,4 +1,5 @@
 {
+	"name": "SoftRedirector",
 	"private": true,
 	"scripts": {
 		"test": "grunt test"
