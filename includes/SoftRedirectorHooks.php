@@ -1,4 +1,7 @@
 <?php
+
+use MediaWiki\MediaWikiServices;
+
 /**
  * Hooks for SoftRedirector extension
  *
@@ -112,7 +115,7 @@ class SoftRedirectorHooks {
 
 		$output = [];
 		if ( $pageIds ) {
-			$dbr = wfGetDB( DB_REPLICA );
+			$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
 
 			$redirects = [];
 			if ( $includeRedirects ) {

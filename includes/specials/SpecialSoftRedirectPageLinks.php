@@ -7,6 +7,7 @@
  * @ingroup Extensions
  */
 
+use MediaWiki\MediaWikiServices;
 use Wikimedia\Rdbms\DBError;
 use Wikimedia\Rdbms\IResultWrapper;
 
@@ -110,7 +111,7 @@ class SpecialSoftRedirectPageLinks extends QueryPage {
 		}
 
 		$fname = get_class( $this ) . '::recache';
-		$dbw = wfGetDB( DB_PRIMARY );
+		$dbw = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
 		if ( !$dbw ) {
 			return false;
 		}
@@ -183,7 +184,7 @@ class SpecialSoftRedirectPageLinks extends QueryPage {
 	 * @return IResultWrapper
 	 */
 	public function fetchFromCache( $limit, $offset = false ) {
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
 		$options = [];
 		if ( $limit !== false ) {
 			$options['LIMIT'] = intval( $limit );
