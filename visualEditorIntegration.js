@@ -37,7 +37,7 @@ ve.dm.MWSoftRedirectMetaItem.static.toDataElement = function () {
 };
 
 ve.dm.MWSoftRedirectMetaItem.static.toDomElements = function ( dataElement, doc ) {
-	var meta = doc.createElement( 'meta' );
+	const meta = doc.createElement( 'meta' );
 	meta.setAttribute( 'property', 'mw:PageProp/softredirect' );
 	return [ meta ];
 };
