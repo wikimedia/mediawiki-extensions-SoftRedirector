@@ -1,4 +1,7 @@
 <?php
+
+use MediaWiki\Title\Title;
+
 /**
  * SoftRedirectPages SpecialPage for SoftRedirector extension
  * This page lists all the soft redirect pages

@@ -8,6 +8,7 @@
  */
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use Wikimedia\Rdbms\DBError;
 use Wikimedia\Rdbms\IResultWrapper;
 
@@ -37,7 +38,8 @@ class SpecialSoftRedirectPageLinks extends QueryPage {
 				'p1' => 'page',
 				'p2' => 'page',
 				'pagelinks',
-				'page_props'
+				'page_props',
+				'linktarget'
 			],
 			// The fields we are selecting correspond with fields in the
 			// querycachetwo table so that the results are cachable.
@@ -51,8 +53,9 @@ class SpecialSoftRedirectPageLinks extends QueryPage {
 			'conds' => [
 				'p1.page_id = pp_page',
 				'pp_propname' => 'softredirect',
-				'pl_namespace = p1.page_namespace',
-				'pl_title = p1.page_title',
+				'pl_target_id = lt_id',
+				'lt_namespace = p1.page_namespace',
+				'lt_title = p1.page_title',
 				'p2.page_id = pl_from',
 				'p2.page_namespace' => $this->namespaceInfo->getContentNamespaces(),
 				'p2.page_is_redirect != 1'
